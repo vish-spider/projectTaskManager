@@ -62,8 +62,7 @@ class MyTable(QTableWidget):
 					warn.setStandardButtons(QMessageBox.Ok);
 					warn.exec_()
 					self.setItem(row, col, QTableWidgetItem(str("")))
-
-		self.FileOpenProcess = False
+			self.FileOpenProcess = False
 
 	def c_Clicked(self):
 		if self.FileOpenProcess == False:
@@ -281,7 +280,7 @@ class Sheet(QMainWindow):
 		add_new_row = QAction("&Add Row", self)
 		add_new_row.setShortcut("Ins")
 		remove_selected_row = QAction("&Remove Row", self)
-		remove_selected_row.setShortcut("Del")
+		remove_selected_row.setShortcut("Ctrl+Del")
 		indent_task = QAction("&Indent Task", self)
 		indent_task.setShortcut('Ctrl+Right')
 		outdent_task = QAction("&Outdent Task", self)
