@@ -32,6 +32,7 @@ class MyTable(QTableWidget):
 			row = self.currentRow()
 			col = self.currentColumn()
 			self.FileOpenProcess = True
+			print ("row =" + str(row) + "coloumn = " + str(col) )
 			try:
 				if int(col) == 6 :
 					print ("in calculation")
@@ -42,21 +43,20 @@ class MyTable(QTableWidget):
 					print("in change dependency" )
 					self.recalcDates(row)
 			except:
+				print ("in Exception")
+				type, value, traceback = sys.exc_info()
+				print (value)
 				if (self.item(row,4) is None ):
 					self.setItem(row,4,QTableWidgetItem("FS"))
-					pass
 				elif (self.item(row,2) is None ):
 					self.setItem(row,2, QTableWidgetItem("0"))
-					pass
 				elif (self.item(row, 5) is None):
 					self.setItem(row, 5, QTableWidgetItem(str(datetime.datetime.today())))
 					if (self.item(row, 6) is None):
 						self.setItem(row, 6, QTableWidgetItem("1d"))
-
 				elif (self.item(row, 6) is None):
 					self.setItem(row, 6, QTableWidgetItem("1d"))
 					self.recalcDates(row)
-
 				else:
 					warn = QMessageBox(QMessageBox.Warning, "Error!",  "Could Not Calculate")
 					warn.setStandardButtons(QMessageBox.Ok);
@@ -97,12 +97,13 @@ class MyTable(QTableWidget):
 	def recalcDates(self, row):
 		type = self.item(int(row),4).text()
 		print (type)
-		if type.lower() == "fs":
-			startDate = self.item(int(self.item(int(row-1), 2).text()), 7).text()
-		elif type.lower() == 'ss':
-			startDate = self.item(int(self.item(int(row-1), 2).text()), 5).text()
-		self.setItem(int(row),5, QTableWidgetItem(str(startDate)))
-		self.setItem(int(row),7, QTableWidgetItem(str(self.calculateEndDate (row))))
+		if row !=0:
+			if type.lower() == "fs":
+				startDate = self.item(int(self.item(int(row), 2).text()), 7).text()
+			elif type.lower() == 'ss':
+				startDate = self.item(int(self.item(int(row-1), 2).text()), 5).text()
+			self.setItem(int(row),5, QTableWidgetItem(str(startDate)))
+			self.setItem(int(row),7, QTableWidgetItem(str(self.calculateEndDate (row))))
 
 
 	def calculateEndDate(self, row):
