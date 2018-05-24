@@ -40,8 +40,9 @@ class MyTable(QTableWidget):
 					print (endDate)
 					self.setItem(row, 7, QTableWidgetItem(str(endDate)))
 				elif int(col) in (2,4):
-					print("in change dependency" )
-					self.recalcDates(row)
+					if self.circularcheck() :
+						print("in change dependency" )
+						self.recalcDates(row)
 			except:
 				print ("in Exception")
 				type, value, traceback = sys.exc_info()
@@ -129,9 +130,6 @@ class MyTable(QTableWidget):
 			QMessageBox.warning(self.view, 'Wrong Format', msg)
 
 		return(enddate)
-
-
-
 
 	def openProject(self):
 		self.FileOpenProcess = True
