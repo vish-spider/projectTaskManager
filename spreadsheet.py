@@ -1,4 +1,4 @@
-import os,sys,pymysql,getpass,datetime,csv,regex as re
+import os,sys,getpass,datetime,csv,regex as re
 from PyQt5.QtWidgets import QTableWidget, QApplication, QMainWindow, QMessageBox
 from PyQt5 import (QtWidgets, QtCore)
 from PyQt5 import QtGui
